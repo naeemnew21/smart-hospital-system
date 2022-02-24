@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,6 +32,19 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # my apps
+    'user.apps.UserConfig',
+    'xpatient.apps.XpatientConfig',
+    'xstaff.apps.XstaffConfig',
+    'xstaff_doctor.apps.XstaffDoctorConfig',
+    'y_service.apps.YServiceConfig',
+    'ys_appointment.apps.YsAppointmentConfig',
+    'ys_blood_bank.apps.YsBloodBankConfig',
+    'ys_laboratory.apps.YsLaboratoryConfig',
+    'ys_pharmacy.apps.YsPharmacyConfig',
+    'ys_x_ray.apps.YsXRayConfig',
+    
+    # django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,7 +68,9 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+                os.path.join(BASE_DIR, 'templates'),
+                ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,6 +84,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'project.wsgi.application'
+AUTH_USER_MODEL = 'user.MyUser'
 
 
 # Database
@@ -116,6 +133,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / "static"
+STATICFILES_DIRS = [
+    BASE_DIR / "project/static",
+]
+
+MEDIA_URL =  'media/'
+MEDIA_ROOT = BASE_DIR / "media"
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
