@@ -24,8 +24,8 @@ def generate_random_username(length=16, chars=ascii_lowercase+digits, split=4, d
 
 @receiver(pre_save, sender=MyUser)
 def my_callback(sender, instance, *args, **kwargs):
-    if not(instance.username):
-        instance.username = generate_random_username()
+    #if not(instance.username):
+    instance.username = generate_random_username()
 
 
 
@@ -39,6 +39,18 @@ def create_user_profile(sender, instance, created, **kwargs):
             sex = ID_Valid(instance.national_id).get_sex() # Male/Female
             )
         UserVital.objects.create(user=instance)
-        if instance.is_staff:
+        if instance.is_staff and not(instance.is_superuser):
             JobProfile.objects.create(user = instance)
+        if instance.is_superuser:
+            JobProfile.objects.create(user = instance, job='HR')
+            instance.is_superuser = False
+            instance.save()
 
+
+
+@receiver(post_save, sender=MyUser)
+def save_user_profile(sender, instance, **kwargs):
+    exist = JobProfile.objects.filter(user=instance).exists()
+    if not(exist) and instance.is_staff:
+        JobProfile.objects.create(user=instance)
+ 

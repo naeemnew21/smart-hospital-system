@@ -1,0 +1,204 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+ <!---------------------------------------------------------------------------------------------------------------->
+<!---------Cover section------------------------------------------------------------------------>
+
+<section id="Home" class="p-5 mt-5 d-flex align-items-center justify-content-center mx-auto" style="height: 100vh; max-width: 1400px;">
+<header class="masthead ">
+	<div class="row d-flex  ">
+		<div class="col-lg-6 col-md-12 col-sm-12 fw-bold mx-auto my-auto justify-content-center text-center text-xl-start">
+			<h1 class="display-3 fw-bold text-shadow" style="color: #00111B; text-shadow: 2px 2px 5px rgba(28, 12, 48, 0.171);">Digital era is just beginning</h1>
+			{% if request.user.is_authenticated %}
+				<a role="button" class="hero-btn btn fw-bold fs-3 mt-4 mx-auto text-white btn-primary" href="{%url 'user:fork'%}">{{request.user.first_name}}</a>
+			{% else %}
+				<button type="button" class="hero-btn btn fw-bold fs-3 mt-4 mx-auto text-white btn-primary" data-bs-toggle="modal" data-bs-target="#modalSignin">Join us</button>
+			{% endif %}
+		</div>
+		<div class="col-xl-6 my-auto d-xl-flex justify-content-end  d-none">
+			<img src="{% static 'images/med.svg' %}" alt=""  style="width:552px;height: 481px">
+		</div>
+	</div>
+<div class="mt-5">
+	<a type="button" href="#shs" id="down" style="color:rgba(8, 1, 17, 0.986)">
+	  <svg xmlns="http://www.w3.org/2000/svg" width="55" height="55" fill="currentColor" class="bi bi-arrow-down-circle position-absolute bottom-0 start-50 translate-middle-x pb-2" viewBox="0 0 16 16">
+		<path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+	  </svg>
+	</a>
+</div>
+</header>
+</section>
+<!--------------------------------------------------------------------------------------------------------------------->
+<!------------------------------------------------SHS introduction--------------------------------------------------------------------->
+
+<section id="shs" class="p-5  d-flex align-items-center justify-content-center mx-auto bg-white" style="box-shadow: 0px 4px 75px 22px rgba(0, 0, 0, 0.09);">
+   <header style="max-width: 1400px;">
+	 
+	<img src="{% static 'images/logo.svg' %}" class="d-block mx-auto w-50 mt-3 " alt="" style="min-width: 17.5rem; margin-bottom: 3rem;">
+   </div>
+   	   <p class="my-4 fs-5" >Sed fermentum urna id mauris vehicula, sed finibus purus blandit. Duis luctus tempus lacinia. Nunc non magna felis. Donec malesuada ut ex pharetra congue. Nunc pretium malesuada nisl, vel ornare nulla volutpat non. Suspendisse viverra sagittis felis a placerat. Integer varius, nunc ut venenatis congue, purus ex tempor erat, nec efficitur risus ante nec eros. Nulla augue lectus, hendrerit vitae quam eget, venenatis imperdiet ante. In dictum ornare lectus non viverra. Pellentesque at mattis lorem. Mauris quis diam luctus, convallis leo non, viverra ipsum. Fusce ut elementum lectus. Pellentesque sed nibh eget libero ullamcorper dictum eu ac odio. Nam quis arcu et justo ultricies sodales nec nec odio. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+
+	</header>
+</section>
+
+<!------------------------------------------------------------------------------------------------------------------->
+  <!--Services section-->
+  
+
+    <section class="header p-5 mx-auto" id="Services" style="max-width: 1400px;">
+      <div>
+	    <h1 class=" display-3 text-center py-4 fw-bold" >Services</h1>
+      <!--<h6 class="lead">هنا نعرض لكم خدماتنا</h6>-->
+       </div>
+		<div class="row">
+
+		<div class="col-md-6  mx-auto my-3 ">
+			<div class="card card-cover h-100 overflow-hidden text-white bg-dark shadow-lg" style="background-image: url({% static 'images/doc.jpg'%}) ;border-radius: 25px; background-size: cover; background-blend-mode:soft-light;">
+				<div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+					<h3 class="pb-2 border-bottom display-6 fw-bold">Doctors</h3>
+					<h5 class="pt-2 mt-1 mb-4 ">Our primary care providers have expertise in Family Medicine, Internal Medicine and Pediatric and Adolescent Medicine</h5>
+				<ul class="d-flex list-unstyled mt-auto">
+					<li class="me-auto">
+					<img src="{% static 'images/icon.svg' %}" class="w-25">
+					</li>
+				</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-6  mx-auto my-3 ">
+			<div class="card card-cover h-100 overflow-hidden text-white bg-dark shadow-lg" style="background-image: url({% static 'images/patient.jpg' %}) ;border-radius: 25px; background-size: cover; background-blend-mode:soft-light;">
+				<div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+				<h3 class="pb-2 border-bottom display-6 fw-bold">Patients</h3>
+				<h5 class="pt-2 mt-1 mb-4 ">View your personal information, people you are authorized to access, and view who has access to your records</h5>
+				<ul class="d-flex list-unstyled mt-auto">
+					<li class="me-auto">
+						<img src="{% static 'images/icon.svg' %}" class="w-25">
+					</li>
+					
+				</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-12  mx-auto my-3 ">
+			<div class="card card-cover h-100 overflow-hidden text-white bg-dark shadow-lg" style="background-image: url({% static 'images/lab.jpg' %}) ;border-radius: 25px; background-size: cover; background-blend-mode:soft-light;">
+				<div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+					<h3 class="pb-2 border-bottom display-6 fw-bold">Laboratory</h3>
+					<h5 class="pt-2 mt-1 mb-4  ">View details of upcoming or completed laboratory, completed Pathology tests and radioligical reports</h5>
+				<ul class="d-flex list-unstyled mt-auto">
+					<li class="me-auto">
+						<img src="{% static 'images/icon.svg' %}" class="w-25">
+					</li>
+				</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-12  mx-auto my-3 ">
+			<div class="card card-cover h-100 overflow-hidden text-white bg-dark shadow-lg" style="background-image: url({% static 'images/appointment.jpg' %}) ;border-radius: 25px; background-size: cover; background-blend-mode:soft-light;">
+				<div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+					<h3 class="pb-2 border-bottom display-6 fw-bold">Appointments</h3>
+					<h5 class="pt-2 mt-1 mb-4  ">View your upcoming appointments, request to reschedule or cancel existing appointments</h5>
+				<ul class="d-flex list-unstyled mt-auto">
+					<li class="me-auto">
+						<img src="{% static 'images/icon.svg' %}" class="w-25">
+					</li>
+				</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+    </section>
+<!---------------------------------------------------------------------------------------------------------------->
+    <!--About us section-->
+    <section id="About us" class="p-5  d-flex align-items-center justify-content-center mx-auto bg-white " style="box-shadow: 0px 4px 75px 22px rgba(0, 0, 0, 0.09);">
+	<div class="row flex-lg-row-reverse align-items-center g-5 py-5" style="max-width: 1400px;">
+		<div class="col-10 col-sm-8 col-lg-5">
+		  <img src="{% static 'images/about.svg' %}" class="d-lg-block d-none mx-lg-auto img-fluid mx-auto justify-content-center w-75" alt="Bootstrap Themes"  loading="lazy">
+		</div>
+		<div class="col-lg-7">
+		  <h1 class="display-3 fw-bold lh-1 mb-4 text-lg-start text-center border-bottom pb-2 text-primary">About us</h1>
+		  <p class="lead">We are a group of students at the 4th year of Communication and Electronics Department at the Faculty of Engineering - Alexandria university. This website is our graduation project and it is about the concept of digital transformation in medical field.</p>
+          
+          <p class="lead">Our aim is to improve the level of healthcare either for patients or for healthcare givers under the concept of UX (user experience) optimisation.</p>
+          
+          <p class="lead">As a long-term vision, we want to create the missing link among all people in the medical field. We want to connect all health associations in Egypt to introduce the optimal experience for patientsand healthcare givers.</p>
+          
+          <p class="lead">We know that it's a big dream, but the generous care from the country towards the digitalization is our greatest motivator.</p>
+		</div>
+	  </div>
+	</section>
+	<!--
+	  <section id="shs" class="p-5  d-flex align-items-center justify-content-center mx-auto bg-white" style="max-width: 1400px;box-shadow: 0px 4px 75px 22px rgba(0, 0, 0, 0.09);">
+	  <div class="card shadow-lg" style="border-radius: 25px;">
+		<div class="card-header py-4 " style="border-top-right-radius: 25px; border-top-left-radius: 25px;">
+			<h1 class="fw-bold  display-5 ">About us</h1>
+		</div>
+		<div class="card-body rounded">
+		  <h4 class="card-title mb-3 display-6">Digital transformation of hospital management system</h4>
+          <p class="lead">We are a group of students at the 4th year of Communication and Electronics Department at the Faculty of Engineering - Alexandria university. This website is our graduation project and it is about the concept of digital transformation in medical field.</p>
+          
+          <p class="lead">Our aim is to improve the level of healthcare either for patients or for healthcare givers under the concept of UX (user experience) optimisation.</p>
+          
+          <p class="lead">As a long-term vision, we want to create the missing link among all people in the medical field. We want to connect all health associations in Egypt to introduce the optimal experience for patientsand healthcare givers.</p>
+          
+          <p class="lead">We know that it's a big dream, but the generous care from the country towards the digitalization is our greatest motivator.</p>
+		</div>
+		
+	  </div>
+	</section>
+	-->
+	  <section class="header p-5 mx-auto" id="FAQ" style="max-width: 1400px;">
+		<h1 class="fw-bold  display-3 py-4 text-center" >FAQ</h1>
+		<div class="accordion shadow rounded-5" id="accordionPanelsStayOpenExample" style="border-radius: 25px !important;">
+			<div class="accordion-item">
+			  <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+				<button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+				  Why SHS?
+				</button>
+			  </h2>
+			  <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+				<div class="accordion-body">
+				  Smart Hospital System is an idea that targets local hospitals in Egypt. Our objective is to facilitate the life cycle
+				  of mangement system in our hospitals and achieve the best user experience for all people while using SHS. Because, 
+				  when the doctors, patients, nurses, and all workers in the healthcare system find this customised experience, their life
+				  would be much better.
+				</div>
+			  </div>
+			</div>
+			<div class="accordion-item">
+			  <h2 class="accordion-header " id="panelsStayOpen-headingTwo">
+				<button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+				  Is SHS suitable for usage on smartphones?
+				</button>
+			  </h2>
+			  <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+				<div class="accordion-body">
+					SHS is a web application at its first version. We tried to make it mobile friendly as much as we could but,
+					you may notice some glitches in styles specificaly while viewing tables in your profiles. It won't ruin the 
+					user experience but to achieve the best user experience; <strong>we recommend to use SHS on desktops 
+					or tablets. </strong>
+				</div>
+			  </div>
+			</div>
+			<div class="accordion-item">
+			  <h2 class="accordion-header " id="panelsStayOpen-headingThree">
+				<button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+				  Would be there a mobile application for SHS?
+				</button>
+			  </h2>
+			  <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+				<div class="accordion-body">
+					No until now, but we will consider it in 
+					the coming version of SHS. Stay tuned!
+				</div>
+			  </div>
+			</div>
+		  </div>
+	  </section>
+
+{% endblock %}

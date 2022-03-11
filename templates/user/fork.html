@@ -1,0 +1,20 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container  pt-4 ">
+    <br>
+    <br>
+  </div>
+
+<div class="container  pt-4 ">
+    <a role="button" class="hero-btn btn fw-bold fs-3 mt-4 mx-auto text-white btn-primary" href="{%url 'patient:dashboard'%}">Patient</a>
+</div>
+
+<div class="container  pt-4 ">
+    <a role="button" id="staff99" class="hero-btn btn fw-bold fs-3 mt-4 mx-auto text-white btn-primary" href="/{{request.user.jobprofile.job|lower}}/">{{request.user.jobprofile.job}}</a>
+</div>
+
+{% endblock %}

@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import XRayModel, RequsetXRay
 
-# Register your models here.
+admin.site.register(XRayModel)
+admin.site.register(RequsetXRay)

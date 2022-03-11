@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import os
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-8kcq6pxq1b6x_u15n15^=se4o3qu1l+thk+%3i7*c-c6w78jfo'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -35,8 +36,12 @@ INSTALLED_APPS = [
     # my apps
     'user.apps.UserConfig',
     'xpatient.apps.XpatientConfig',
+    
     'xstaff.apps.XstaffConfig',
     'xstaff_doctor.apps.XstaffDoctorConfig',
+    'xstaff_hr.apps.XstaffHrConfig',
+    'xstaff_secretary.apps.XstaffSecretaryConfig',
+    
     'y_service.apps.YServiceConfig',
     'ys_appointment.apps.YsAppointmentConfig',
     'ys_blood_bank.apps.YsBloodBankConfig',
@@ -44,6 +49,9 @@ INSTALLED_APPS = [
     'ys_pharmacy.apps.YsPharmacyConfig',
     'ys_x_ray.apps.YsXRayConfig',
     
+    'rest_framework',
+    'crispy_forms',
+     
     # django apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -132,10 +140,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / "static"
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'static'
 STATICFILES_DIRS = [
-    BASE_DIR / "project/static",
+    BASE_DIR / 'project/static',
 ]
 
 MEDIA_URL =  'media/'
@@ -147,3 +155,17 @@ MEDIA_ROOT = BASE_DIR / "media"
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+LOGIN_REDIRECT_URL  = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER ='smarthospitalsystem2022@gmail.com'
+EMAIL_HOST_PASSWORD ='hifckphfjffbtbbq'
+EMAIL_USE_TLS = True
+EMAIL_PORT = '587'

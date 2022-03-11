@@ -10,7 +10,8 @@ JOBLIST = [
     ('HR', 'HR'),
     ('Dr', 'Dr'),
     ('Nurse', 'Nurse'),
-    ('Ph', 'Ph'),
+    ('pharmacist', 'pharmacist'),
+    ('Secretary', 'Secretary'),
 ]
 
 DEGREELIST = [
@@ -22,30 +23,47 @@ DEGREELIST = [
 ]
 
 
+DAYS = [
+    ('Sat', 'Saturday'),
+    ('Sun', 'Sunday'),
+    ('Mon', 'Monday'),
+    ('Tue', 'Tuesday'),
+    ('Wed', 'Wednesday'),
+    ('Thu', 'Thursday'),
+    ('Fri', 'Friday'),
+]
+
+
+
+class JobDays(models.Model):
+    day_name   = models.CharField(choices= DAYS, max_length=3, blank=True, null=True)
+    start_time = models.TimeField(blank=True, null=True)
+    end_time   = models.TimeField(blank=True, null=True)
+    
+    def __str__(self):
+        return self.day_name
+    
+    def save(self, *args, **kwargs):
+        exist = JobDays.objects.filter(day_name=self.day_name , start_time=self.start_time, end_time=self.end_time ).exists()
+        if exist:
+            return
+        super().save(*args, **kwargs)
+
+
 class JobProfile(models.Model):
-    user       = models.OneToOneField(MyUser, on_delete=models.CASCADE)
+    user       = models.OneToOneField(MyUser, on_delete=models.CASCADE, related_name='jobprofile')
     job        = models.CharField(choices= JOBLIST, max_length=20, default="None")
-    expeience  = models.IntegerField(default=0)
+    experience = models.IntegerField(default=0)
     degree     = models.CharField(choices= DEGREELIST, max_length=20, default="None")
     
     like      = models.IntegerField(default=0) # give like
     dislike   = models.IntegerField(default=0) # give dislike
     
-    start_time = models.TimeField(default = '00:00:00')
-    end_time   = models.TimeField(default = '00:00:00')
-    days       = models.ForeignKey('JobDays', on_delete=models.SET_NULL , null=True)
+    work_days  = models.ManyToManyField(JobDays, blank=True)
     
     def __str__(self):
-        return self.user
-    
-    
+        return self.user.national_id
 
-class JobDays(models.Model):
-    sat = models.BooleanField(default = False)
-    sun = models.BooleanField(default = False)
-    mon = models.BooleanField(default = False)
-    tue = models.BooleanField(default = False)
-    wed = models.BooleanField(default = False)
-    thu = models.BooleanField(default = False)
-    fri = models.BooleanField(default = False)
+
+
     

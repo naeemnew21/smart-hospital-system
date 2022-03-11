@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import LabModel, RequestLab
 
-# Register your models here.
+admin.site.register(LabModel)
+admin.site.register(RequestLab)

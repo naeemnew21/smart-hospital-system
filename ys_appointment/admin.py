@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import AppointModel, RequsetAppointment
 
-# Register your models here.
+admin.site.register(AppointModel)
+admin.site.register(RequsetAppointment)

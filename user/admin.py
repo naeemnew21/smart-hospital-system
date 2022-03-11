@@ -5,7 +5,7 @@ from .models import MyUser, UserProfile, UserVital
         
 class CustomUserAdmin(UserAdmin):
     model = MyUser
-    list_display = [ 'national_id', 'phone', 'is_staff']
+    list_display = [ 'national_id', 'phone', 'is_active', 'is_staff']
     list_display_links = ['national_id', 'phone']
     
     search_fields = ('national_id','phone',)

@@ -1,0 +1,83 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<!---------------------------------------------Registeration form--------------------------------------------------------->
+<div class="container  pt-4 ">
+  <br>
+  <br>
+</div>
+
+<div class="container  pt-4 " >
+      <div class="row align-items-center" >
+      <div class=" col-lg-12 d-flex bg-white  p-4 mx-auto  shadow-lg" style="max-width: 750px; border-radius: 25px;">          
+          
+        <form class=" row needs-validation" method="POST" >
+
+          {% csrf_token %}
+
+            <div class="row g-3">
+              <header style="display:block">
+              <h3 class=" fw-bold pb-2 border-bottom">Login</h3> 
+              </header>
+
+              <h6 style="color:#ff0000;">{{error}}</h6>
+              
+              <div class="col-12">
+                <label for="username" class="form-label fw-bold">User*</label>
+                <input type="username" class="form-control" name="username" id="username"  placeholder="email, mobile number or national id" required>
+              </div>
+  
+              <div class="col-12">
+                <label for="password" class="form-label fw-bold">Password*</label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password" minlength="8" maxlength="15" required>
+                <p class="text-muted pt-1" style="font-size:smaller;">*Your password must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters.</p>
+              </div>
+                
+            <button class="w-100 btn btn-primary btn-lg mt-4 fw-bold rounded-pill"  type="submit" id="regbtn">Login</button>
+          </form>
+        
+        </div>
+      </div>
+  </div>
+</div>
+
+<!-- 
+  <script>
+
+  
+  function matchPassword() {  
+    
+    var pw1 = document.getElementById("pass1");  
+    var pw2 = document.getElementById("pass2");  
+    if(pw1.value != pw2.value)  
+    {   
+      document.getElementById("matching").style.display="block"; 
+    } else {  
+      document.getElementById("matching").style.display="none";  
+    }  
+  } 
+
+  document.getElementById("floatingInput").addEventListener("keyup", pass);
+
+  document.getElementById("floatingPassword").addEventListener("keyup", pass);
+  function pass(){
+    const email = document.getElementById("floatingInput").value;
+      const pass = document.getElementById("floatingPassword").value;
+    if(email.length >= 4 && pass.length >= 4) {
+      document.getElementById("signbtn").removeAttribute("disabled");
+    }
+    else {
+      document.getElementById("signbtn").setAttribute("disabled",true);
+    }	
+  }
+  
+  
+  </script>  
+-->
+
+{% endblock %}
+

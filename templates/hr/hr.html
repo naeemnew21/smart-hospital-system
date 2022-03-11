@@ -1,0 +1,120 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Resources Dashboard</title>
+    <link rel="icon" 
+    type="image/svg" 
+    href="{% static 'images/icon.svg' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat" >
+    <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
+	  <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <script src="https://kit.fontawesome.com/e5dfa58321.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  </head>
+<body style="background-color: #f2f7fd;">
+
+<div class="container-fluid ps-0">
+    <div class="nav d-none d-lg-flex flex-column nav-pills  justify-content-start bg-white h-100 p-3 ms-0 border-end shadow-sm position-fixed" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="width: 220px;">
+        <a class="navbar-brand d-none d-sm-block mt-1 mx-auto" href="{%url 'user:index'%}"  ><img src="{% static 'images/logo.svg'%}" style="width: 9.5rem;" alt=""> </a>
+          <hr>
+       <button class="nav-link active show me-auto  link-dark d-flex mb-3 fw-bold  rounded-pill" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true" style="padding-right: 87px;"><i class="bi bi-person-circle me-3" width="16" height="16"></i>Home</button>
+      <hr class=" mt-auto">
+            <div class="dropdown">
+              <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="{{request.user.userprofile.avatar.url}}" alt="" width="32" height="32" class="rounded-circle me-2">
+                <strong>Mohammad</strong>    <!--Displayed User name must be changed according to the registered account user name-->
+              </a>
+              <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2" >
+                <li><a class="dropdown-item" href="{%url 'patient:dashboard'%}">Go to patient</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{%url 'user:logout'%}">Sign out</a></li>
+              </ul>
+            
+          </div>
+    </div>
+
+    <div class="nav d-lg-none d-flex flex-column nav-pills p-3 bg-white h-100 border-end shadow-sm position-fixed" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="max-width: 5rem;">
+      <a class="navbar-brand d-lg-none me-auto mb-3" href="{%url 'user:index'%}"><img src="{% static 'images/icon.svg'%}" alt="" style="width: 3rem;"></a>
+      
+      <button class="nav-link active me-auto  link-dark d-flex mb-2 fw-bold " id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true" ><i class="bi bi-person-circle fs-4" width="16" height="16"></i></button>
+            
+          <div class="dropdown mt-auto ">
+            <a href="#" class="d-flex align-items-center link-dark teSxt-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="{{request.user.userprofile.avatar.url}}" alt="" width="24" height="24" class="rounded-circle me-2">
+                 <!--Displayed User name must be changed according to the registered account user name-->
+            </a>
+            <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2" >
+              <li><a class="dropdown-item" href="{%url 'patient:dashboard'%}">Go to patient</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="index.html">Sign out</a></li>
+            </ul>
+        </div>
+    </div>
+    <!--------------------------------------------------------------------------------------------------------------->
+    <!----Content--------------------------------------------------------------------------->
+    
+    <div class="maincontent">
+      <div class="tab-content" id="v-pills-tabContent" >
+      
+        <div class="tab-pane fade active show p-2 " id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" >
+          <div class="container-fluid" > 
+            <div class="row">
+              <div class="col-12 me-auto mt-3" style="min-width: max-content;">
+                <div class="col-12 me-auto my-2 ms-3 d-flex align-items-center">
+                  <h4 class="fw-bold my-auto" ><i class="fa-solid fa-bars-progress me-3"></i>Human Resources Unit</h4>  <!--Displayed User name must be changed according to the registered account user name-->
+                </div>
+              </div>
+              <div class="col-12  me-auto" >
+                <div class="container bg-white p-4 shadow-sm m-3 border" style="border-radius: 25px; min-width: fit-content;">
+                  <div class="col d-flex align-items-center mb-3">
+                    <h5 class="fw-bold my-auto">Users</h5>
+                  </div>
+                  <div class="search-container" >
+                    <form name="searchUsers" class="row g-3">
+                      <input type="text" placeholder="Search.." name="search" id="search" class="form-control">
+                      <button type="button" onclick=serach_users() class="btn btn-primary btn-sm rounded-pill fw-bold ms-auto px-3 "><i class="fa fa-search" ></i></button>
+                    </form>
+                  </div>
+                  
+                  
+                  <table class="table ">
+                    <thead>
+                      <tr class="bg-light " style="border-top:1px solid #dfdfdf; border-bottom:1px solid #dfdfdf !important">
+                        <th scope="col" class="text-muted ">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">National ID</th>
+                        <th scope="col">Staff</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id='tbody'>
+
+                    </tbody>
+                  </table>
+                  
+                  <nav aria-label="usersPagination" id="usersPagination" class="pt-2">
+                  </nav>
+                </div>
+              
+              </div>
+            </div>  
+          </div>  
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<script src="{% static 'js/hr.js' %}"></script>
+</body>
+</html>

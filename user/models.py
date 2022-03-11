@@ -45,9 +45,8 @@ def validate_id(value):
   
 def validate_name(name):
     if not(name) or name.isspace():
-         raise ValidationError(
-            _('empty name is not valid name')
-        )   
+         raise ValidationError(_('empty name is not valid name'))   
+
 
 def image_upload(instance, filename):
     imgname, exten = filename.split(".")
@@ -84,7 +83,7 @@ class MyUser(AbstractUser):
     national_id = models.CharField(max_length=14 , validators=[validate_id] , unique=True, blank=False, null=False)
     
     first_name  = models.CharField(verbose_name="first name", validators=[validate_name], max_length=30, blank=False, null=False)
-    last_name   = models.CharField(verbose_name="last name", max_length=30, default='')
+    last_name   = models.CharField(verbose_name="last name", max_length=30, blank=True, null=True)
     
     REQUIRED_FIELDS = ['email', 'phone', 'national_id', 'first_name']
 
@@ -96,7 +95,7 @@ class MyUser(AbstractUser):
 
 class UserProfile(models.Model):
     user            = models.OneToOneField(MyUser, on_delete=models.CASCADE)
-    birth_date      = models.DateField(auto_now=False, auto_now_add=False)
+    birth_date      = models.DateField()
     sex             = models.CharField(choices= SEX , max_length= 7)
     
     avatar          = models.ImageField(upload_to=image_upload, default = 'profile/avatar.png', storage = OverwriteStorage() )
@@ -107,7 +106,7 @@ class UserProfile(models.Model):
     blood_type      = models.CharField(choices=BLOOD, max_length= 3, blank=True, null=True)
     
     def __str__(self):
-        return self.user
+        return self.user.national_id
     
 
 
@@ -121,5 +120,5 @@ class UserVital(models.Model):
     temprature          = models.DecimalField(max_digits=3, decimal_places=1, default = 0)
     
     def __str__(self):
-        return self.user
+        return self.user.national_id
     

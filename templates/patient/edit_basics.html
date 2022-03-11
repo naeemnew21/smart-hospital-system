@@ -1,0 +1,97 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<!---------------------------------------------Registeration form--------------------------------------------------------->
+<div class="container  pt-4 ">
+  <br>
+  <br>
+</div>
+
+<div class="container  pt-4 " >
+      <div class="row align-items-center" >
+      <div class=" col-lg-12 d-flex bg-white  p-4 mx-auto  shadow-lg" style="max-width: 750px; border-radius: 25px;">          
+          
+        
+        <form class=" row needs-validation" method="POST" >
+
+          {% csrf_token %}
+
+            <div class="row g-3">
+              <header style="display:block">
+              <h3 class=" fw-bold pb-2 border-bottom">Edit Basic Information</h3> 
+              </header>
+            
+              <div class="col-12">
+                <label for="first_name" class="form-label fw-bold">First Name*</label>
+                <input type="text" value="{{myuser.first_name}}" class="form-control" name="first_name" id="first_name" placeholder="Enter your first name"  maxlength=50 autofocus required>
+                <h6 style="color:#ff0000;">{{form.first_name.errors}}</h6>
+              </div>
+
+              <div class="col-12">
+                <label for="last_name" class="form-label fw-bold">Last Name</label>
+                <input type="text" value="{{myuser.last_name}}" class="form-control" name="last_name"  id="last_name" placeholder="Enter your last name"  maxlength=50 autofocus >
+                <h6 style="color:#ff0000;">{{form.last_name.errors}}</h6>
+              </div>
+  
+              <div class="col-12">
+                <label for="email" class="form-label fw-bold">Email*</label>
+                <input type="email" value="{{myuser.email}}" class="form-control" name="email" id="email" placeholder="you@example.com" required>
+                <h6 style="color:#ff0000;">{{form.email.errors}}</h6>
+              </div>
+  
+              <div class="col-12">
+                <label for="number" class="form-label fw-bold">Phone number*</label>
+                <input type="number" value="{{myuser.phone}}" class="form-control" name="phone" id="phone" pattern="[0]+[1]+[0125]+[\d]{7}" placeholder="Enter your 11-digits phone number" required>
+                <p class="text-muted pt-1" style="font-size:smaller;">*Your phone must be in form "01xx xxx xxxx"</p>
+                <h6 style="color:#ff0000;">{{form.phone.errors}}</h6>
+              </div>
+
+            <button class="w-100 btn btn-primary btn-lg mt-4 fw-bold rounded-pill"  type="submit" id="regbtn">Save Changes</button>
+          </form>
+        
+        
+        </div>
+      </div>
+  </div>
+</div>
+
+<!-- 
+  <script>
+
+  
+  function matchPassword() {  
+    
+    var pw1 = document.getElementById("pass1");  
+    var pw2 = document.getElementById("pass2");  
+    if(pw1.value != pw2.value)  
+    {   
+      document.getElementById("matching").style.display="block"; 
+    } else {  
+      document.getElementById("matching").style.display="none";  
+    }  
+  } 
+
+  document.getElementById("floatingInput").addEventListener("keyup", pass);
+
+  document.getElementById("floatingPassword").addEventListener("keyup", pass);
+  function pass(){
+    const email = document.getElementById("floatingInput").value;
+      const pass = document.getElementById("floatingPassword").value;
+    if(email.length >= 4 && pass.length >= 4) {
+      document.getElementById("signbtn").removeAttribute("disabled");
+    }
+    else {
+      document.getElementById("signbtn").setAttribute("disabled",true);
+    }	
+  }
+  
+  
+  </script>  
+-->
+
+{% endblock %}
+
