@@ -102,7 +102,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body ">  <!----This notification alert the user to take his own midications-->
-          Hello, Mohamed! Don't forget to take your medications
+          Hello, {{request.user.first_name}}! Don't forget to take your medications
         </div>
       </div>
       <div class="toast border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-delay="10000"> <!---dislays for 10 seconds then hides automatically-->
