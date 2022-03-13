@@ -32,7 +32,7 @@
           <div class="dropdown">
             <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
               <img src="{{request.user.userprofile.avatar.url}}" alt="" width="32" height="32" class="rounded-circle me-2">
-              <strong>Dr. Ahmed</strong>    <!--Displayed User name must be changed according to the registered account user name-->
+              <strong>Dr. {{request.user.first_name}}</strong>    <!--Displayed User name must be changed according to the registered account user name-->
             </a>
             <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2" >
               <li><a class="dropdown-item" href="{%url 'patient:dashboard'%}">Go to patient</a></li>
