@@ -21,6 +21,8 @@ from xstaff_doctor.serializers import DoctorSerializer
 
 from ys_appointment.models import AppointModel, RequsetAppointment
 from ys_appointment.serializers import AppointSerializer
+from ys_laboratory.models import LabModel
+from ys_laboratory.serializers import LabSerializer
 from ys_pharmacy.models import Prescription
 from ys_pharmacy.serializers import PrescriptionSerializer
 
@@ -181,4 +183,16 @@ class PrescriptionListApi(ListAPIView):
         return queryset
 
 
+
+class LabsListApi(ListAPIView):
+    serializer_class   = LabSerializer
+    permission_classes = [IsUser]
+    
+    def get_queryset(self):
+        patient   = self.request.user.id
+        queryset = LabModel.objects.filter(
+                                               patient  = patient,
+                                               appoint__discharge = True
+                                               )
+        return queryset
 

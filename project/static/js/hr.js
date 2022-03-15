@@ -90,7 +90,7 @@ function draw_work_days(json, user){
     htmltext +='</div>';
 
     htmltext +='<div  class="form-action-buttons">';
-    htmltext +='<input type="button" class="btn btn-primary rounded-pill fw-bold text-white w-100 mb-2" value="Save changes"';
+    htmltext +='<input type="button" class="btn btn-primary rounded-pill fw-bold text-white w-100 mb-2" value="Add Day"';
     htmltext +=' name="workdays'+job_pk+'"';
     htmltext +=' id='+job_pk;
     htmltext +=' onclick=update_days(this)';
@@ -477,6 +477,10 @@ function update_days(element)
       if (this.readyState == 4 && this.status == 200)
       {
         days = JSON.parse(this.responseText);
+        if(days.detail){
+            alert(days.detail)
+            return;
+        }
         document.getElementById('tbody'+pk).innerHTML = draw_table(days, pk);
       }
     }

@@ -12,6 +12,7 @@ urlpatterns = [
     
     path('myappoints/', views.AppointApi.as_view(), name = 'myappoints'),
     path('pres/', views.PrescriptionListApi.as_view(), name = 'prescriptions'),
+    path('labs/', views.LabsListApi.as_view(), name = 'labs'),
     
     path('edit/', views.edit_profile, name = 'edit_profile'),
     path('book/', views.book, name = 'book'),

@@ -13,6 +13,8 @@ from datetime import date
 
 from ys_appointment.models import AppointModel, RequsetAppointment
 from ys_appointment.serializers import AppointSerializer, DrAppointSerializer
+from ys_laboratory.models import LabModel
+from ys_laboratory.serializers import LabSerializer
 
 from ys_pharmacy.models import Medicine, Prescription, RequestPrescription
 from ys_pharmacy.serializers import MedicineSerializer, PrescriptionSerializer
@@ -44,8 +46,6 @@ class IsDoctor(BasePermission):
 @user_passes_test(doctor_check, login_url='/login/' )
 def dashboard(request):
     return render(request, 'doctor/dr.html')
-
-
 
 
 
@@ -92,7 +92,7 @@ class DrTodayAppointApi(ListAPIView):
 
 
 class PrescriptionRetrieveApi(RetrieveAPIView):
-    queryset = Prescription.objects.all()
+    queryset           = Prescription.objects.all()
     serializer_class   = PrescriptionSerializer
     lookup_field       = "patient"
     permission_classes = [IsDoctor]
@@ -144,14 +144,56 @@ class MedicineDeleteApi(DestroyAPIView):
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
         doctor   = request.user
-        # problem (check if doctor has this medicine)
-        # ***
-        # ***
-        # ***
-        # ***
-        # ***
+        
+        if instance.prescription_set.all()[0].doctor != doctor:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+        
         self.perform_destroy(instance)
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+
+
+
+class AnalysisListApi(ListAPIView):
+    serializer_class   = LabSerializer
+    permission_classes = [IsDoctor]
     
+    def get_queryset(self):
+        doctor   = self.request.user
+        patient  = self.kwargs['patient']
+        queryset = LabModel.objects.filter(doctor  = doctor, patient = patient)
+        return queryset
     
+
+
+
+class AnalysisCreateApi(CreateAPIView):
+    serializer_class   = LabSerializer
+    permission_classes = [IsDoctor]
     
+    def post(self, request, *args, **kwargs):
+        #request.data._mutable=True
+        #request.data=True
+        request.data['doctor'] = request.user.id
+        tdata = {}
+        tdata['patient']  = request.data['patient']
+        tdata['doctor']   = request.data['doctor']
+        tdata['category'] = request.data['category']
+        tdata['appoint']  = request.data['appoint']
+        exist   = LabModel.objects.filter(**tdata).exists()
+        if not(exist):
+            return self.create(request, *args, **kwargs)
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+
+
+
+class AnalysisDeleteApi(DestroyAPIView):
+    serializer_class   = LabSerializer
+    permission_classes = [IsDoctor]
+    
+    def get_queryset(self):
+        doctor   = self.request.user
+        queryset = LabModel.objects.filter(doctor = doctor)
+        return queryset

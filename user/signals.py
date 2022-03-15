@@ -43,7 +43,7 @@ def create_user_profile(sender, instance, created, **kwargs):
             JobProfile.objects.create(user = instance)
         if instance.is_superuser:
             JobProfile.objects.create(user = instance, job='HR')
-            instance.is_superuser = False
+            #instance.is_superuser = False
             instance.save()
 
 

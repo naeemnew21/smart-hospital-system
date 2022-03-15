@@ -49,8 +49,8 @@ def validate_name(name):
 
 
 def image_upload(instance, filename):
-    imgname, exten = filename.split(".")
-    return "profile/%s.%s"%(instance.user.id, exten)
+    imgname, *exten = filename.split(".")
+    return "profile/%s.%s"%(instance.user.id, exten[-1])
 
 
 

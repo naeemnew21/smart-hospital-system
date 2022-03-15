@@ -136,13 +136,15 @@ function draw_body(patient)
 {
     let htmltext = "";
 
-    htmltext +='<div onclick=get_modal_prescription(this) data-name='+patient.patient+' id="panelsStayOpen-'+patient.patient+'" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">';
+    htmltext +='<div id="panelsStayOpen-'+patient.patient+'" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">';
     htmltext +='<div class="accordion-body">';
     htmltext +='<div class="col d-flex justify-content-end" style="border: 1px solid #e7e7e7; border-radius:25px; padding: 0.4rem;">';
-    htmltext +='<a class="btn btn-primary btn-sm rounded-pill fw-bold  px-3 align-items-center d-flex" role="button" data-bs-toggle="modal" data-bs-target="#prescriptionModal'+patient.patient+'" ><i class="fa-solid fa-prescription me-1"></i><span class="d-md-flex d-none">Prescriptions</span> </a>';
-    htmltext +='<a class="btn btn-primary btn-sm rounded-pill fw-bold  px-3 align-items-center mx-2 d-flex" role="button" data-bs-toggle="modal" data-bs-target="#analysisModal" data-bs-whatever="@First_patient_analyis"><i class="fa-solid fa-vial me-1"></i><span class="d-md-flex d-none">Analyses</span></a>';
+    htmltext +='<a onclick=get_modal_prescription(this) data-name='+patient.patient+' class="btn btn-primary btn-sm rounded-pill fw-bold  px-3 align-items-center d-flex" role="button" data-bs-toggle="modal" data-bs-target="#prescriptionModal'+patient.patient+'" ><i class="fa-solid fa-prescription me-1"></i><span class="d-md-flex d-none">Prescriptions</span> </a>';
+   
+    htmltext +='<a onclick=get_modal_lab(this) data-name='+patient.patient+' class="btn btn-primary btn-sm rounded-pill fw-bold  px-3 align-items-center mx-2 d-flex" role="button" data-bs-toggle="modal" data-bs-target="#labModal'+patient.patient+'" data-bs-whatever="@First_patient_analyis"><i class="fa-solid fa-vial me-1"></i><span class="d-md-flex d-none">Analyses</span></a>';
 
     htmltext +='</div>';
+
     htmltext +='<hr>';
     htmltext +='<table class="table table-striped  table-bordered"> ';
     htmltext +='<tbody>';
@@ -301,7 +303,78 @@ function draw_prescription_modal(patients)
 
     return htmltext;
 }
+
+
+function draw_lab_modal(patients)
+{
+    let htmltext = "";
+
+    for (let patient in patients){
+        var pk = patients[patient].patient;
+
+        htmltext +='<div class="modal fade " id="labModal'+patients[patient].patient +'" tabindex="-1" aria-labelledby="labModalLabel" aria-hidden="true" style="min-width: fit-content;">';
+        htmltext +='<div class="modal-dialog modal-xl   " >';
+        htmltext +='<div class="modal-content border-0 px-2" style="border-radius:25px">';
+        htmltext +='<div class="modal-header" >';
+        htmltext +='<h3 class="modal-title fw-bold" id="exampleModalLabel">lab utility</h3>';
+        htmltext +='<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
+        htmltext +='</div>';
+        htmltext +='<div class="modal-body">';
+        htmltext +='<div class="container m-3 mx-auto bg-white  " style="border-radius:25px ;">';
+        htmltext +='<h4 class="pb-2 border-bottom fw-bold m">Add Analysis</h4>';
+        
+        htmltext +='<div class="employee-form">';
+        htmltext +='<form class="row g-3" id="prescriptForm" autocomplete="off">';
+        htmltext +='<div>';
+        htmltext +='<label for="patient-name" class="col-form-label">patient name:</label>';
+        htmltext +='<input type="text" value='+patients[patient].patient_name+' class="form-control" id="patient-name" readonly>';
+        htmltext +='</div>';
+
+        htmltext +='<div>';
+        htmltext +='<label>Analysis name*</label><label class="validation-error hide" id="fullNameValidationError"></label>';
+        htmltext +='<input id="analysis_name'+pk+'" name="analysis_name" class="form-control" type="text"  id="DrugNo">';
+        htmltext +='</div>';
+
+
+        htmltext +='<div  class="form-action-buttons">';
+        htmltext +='<input type="button" class="btn btn-primary rounded-pill px-3 fw-bold text-white" value="+ Add Analysis"';
+        htmltext +=' id='+pk;
+        htmltext +=' name='+patients[patient].appoint_request;
+        htmltext +=' onclick=add_lab(this)';
+        htmltext +='>';
+        htmltext +='</div>';
+
+        htmltext +='</form>';
+        htmltext +='</div>';
+
+        htmltext +='</div>';
+        htmltext +='<br/>';
+     
+        htmltext +='<div class = "employees-table container p-3 bg-white border" style="border-radius: 25px;">';
+      
+        htmltext +='<table class="table table-bordered" id="prescriptList">';
+        htmltext +='<thead>';
+        htmltext +='<tr>';
+        htmltext +='<th>Analysis Name</th>';
+        htmltext +='<th>Delete</th>';
+        htmltext +='</tr>';
+        htmltext +='</thead>';
+        htmltext +='<tbody id="analysis'+pk+'">  </tbody>';
+        htmltext +='</table>';
+
+        htmltext +='</div>';
+
+        htmltext +='</div>';
+        htmltext +='</div>';
+        htmltext +='</div>';
+        htmltext +='</div>';
+        
+    }
+
+    return htmltext;
+}
  
+
 
 
 function draw_prescription(prescription)
@@ -322,17 +395,19 @@ function draw_prescription(prescription)
 }
 
 
-
-
-function draw_lab(json)
+function draw_lab(labs)
 {
     let htmltext = "";
-    for (let patient in json.results){
-        htmltext +='';
-   
+    for (let lab in labs){
+        htmltext +='<tr>';
+        htmltext +='<td>'+labs[lab].category+'</td>';
+        htmltext +='<td><a id='+labs[lab].id+'  name='+labs[lab].patient+' type="button" class="btn btn-danger fw-bold px-2 text-white btn-sm rounded-pill" onClick="del_lab(this)">Delete</a></td>';
+        htmltext +='</tr>';
     }
     return htmltext;
 }
+
+
 
 
 function draw_patient(json)
@@ -364,6 +439,7 @@ function get_today_patients(element)
         patients = JSON.parse(this.responseText);
         document.getElementById("today_patient_list").innerHTML = draw_patient(patients);
         document.getElementById("prescription_modals").innerHTML = draw_prescription_modal(patients);
+        document.getElementById("lab_modals").innerHTML = draw_lab_modal(patients);
       }
     }
     
@@ -472,6 +548,89 @@ function empty_medicine(element)
     document.getElementById("medicine_notes"+pk).value  = '';
 
 }
+
+
+
+
+
+function get_lab(patiend_id){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function()
+    {
+      if (this.readyState == 4 && this.status == 200)
+      {
+        labs = JSON.parse(this.responseText);
+        document.getElementById("analysis"+patiend_id).innerHTML = draw_lab(labs);
+      }
+    }
+    
+    xhttp.open("GET", '/dr/lab/'+patiend_id , true);
+    xhttp.send();   
+}
+
+
+
+function get_modal_lab(element){
+    var patiend_id = element.dataset.name;
+    get_lab(patiend_id);
+}
+
+
+
+
+
+function add_lab(element)
+{
+    let pk = element.id;
+
+    let data = {};
+    data['category'] = document.getElementById("analysis_name"+pk).value;
+    data['patient']  = pk;
+    data['appoint']  = element.name;
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/dr/addlab/", true);
+    const csrftoken = getCookie('csrftoken');
+    xhttp.setRequestHeader('x-csrftoken', csrftoken)
+    xhttp.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
+    xhttp.setRequestHeader('Accept', 'application/json')
+
+    xhttp.onreadystatechange = function()
+    {
+      if (this.readyState == 4 && this.status == 201)
+      {
+        medicine = JSON.parse(this.responseText);
+        get_lab(pk);
+      }
+    }
+    
+    xhttp.send(JSON.stringify(data));   
+}
+
+
+function del_lab(element)
+{
+    let pk      = element.id;
+    let patient = element.name;
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("DELETE", "/dr/dellab/"+pk, true);
+    const csrftoken = getCookie('csrftoken');
+    xhttp.setRequestHeader('x-csrftoken', csrftoken)
+    xhttp.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
+    xhttp.setRequestHeader('Accept', 'application/json')
+
+    xhttp.onreadystatechange = function()
+    {
+      if (this.readyState == 4 && this.status == 204)
+      {
+        get_lab(patient);
+      }
+    }
+    
+    xhttp.send();   
+}
+
 
 
 function getCookie(name) {

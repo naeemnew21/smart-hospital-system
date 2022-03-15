@@ -89,6 +89,22 @@ class JobUpdateView(UpdateAPIView):
     serializer_class   = JobProfileSerializer
     permission_classes = [IsHr]
     
+    def put(self, request, *args, **kwargs):
+        obj        = self.get_object()
+        job_before = obj.job
+        response   = self.update(request, *args, **kwargs)
+        obj        = self.get_object()
+        job_after  = obj.job
+        if job_after != job_before:
+            if job_before == 'Dr':
+                doctor = Doctor.objects.get(user = obj.user)
+                doctor.delete()
+            if job_before == 'Secretary':
+                sec = Secretary.objects.get(user = obj.user)
+                sec.delete()
+        return response
+    
+    
     
 class DrUpdateView(UpdateAPIView):
     queryset           = Doctor.objects.all()

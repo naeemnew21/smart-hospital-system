@@ -31,8 +31,8 @@ SPECIALS = [
 
 
 class Doctor(models.Model):
-    user = models.OneToOneField(MyUser, on_delete=models.CASCADE)
-    specialty  = models.CharField(choices = SPECIALS, max_length=20, default='General')
+    user      = models.OneToOneField(MyUser, on_delete=models.CASCADE)
+    specialty = models.CharField(choices = SPECIALS, max_length=20, default='General')
     
     def __str__(self):
         return self.user.first_name
