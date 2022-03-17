@@ -1,4 +1,3 @@
-               
                     
 function drawJSON(json)
 {
@@ -11,47 +10,121 @@ function drawJSON(json)
         htmltext +='<td class="patientDB">'+ json.results[appoint].patient_name +'</td>';
         htmltext +='<td colspan="2">'+ json.results[appoint].appointment_date +'</td>';
         htmltext +='</tr>';
+        htmltext +='<tr >'+
+                    '<td colspan="12" style="padding:0 !important">'+
+                    '<div class=" collapse" id="EMR1" >'+
+                      
+                      '<table class="table table-striped  table-bordered">' +
+                        '<tbody>'+
+                          '<tr>'+
+                            '<th colspan="4" class="bg-secondary text-white text-center">General Medical History</th>'+
+                          '</tr>'+
+                          '<tr>'+
+                            '<th scope="col" rowspan="7" class="align-middle text-center">Personal history</th>'+
+                            '<th scope="col">Name</th>'+
+                            '<td scope="col" colspan="2">'+json.results[appoint].patient_name+'</td>'+
+                          '</tr>'+
+                          '<tr>'+
+                            '<th scope="col">Age</th>'+
+                            '<td colspan="2">88 years old</td>'+
+                          '</tr>'+
+                          '<tr>'+
+                            '<th scope="col">Gender</th>'+
+                            '<td colspan="2">Male</td>'+
+                          '</tr>'+
+                          '<tr>'+
+                            '<th scope="col">Occupation</th>'+
+                            '<td colspan="2">Farmer</td>'+
+                          '</tr>'+
+                          '<tr>'+
+                            '<th scope="col">Marital status</th>'+
+                            '<td colspan="2">Married</td>'+
+                          '</tr>'+
+                          '<tr>'+
+                            '<th scope="col">Race</th>'+
+                            '<td colspan="2">Egyptian</td>'+
+                          '</tr>'+
+                          '<tr>'+
+                            '<th scope="col">Habits</th>'+
+                            '<td colspan="2">Heavy smoker</td>'+
+                          '</tr>'+
+
+                          '<tr>'+
+                            '<th scope="col" class="align-middle text-center">Chronic diseases</th>'+
+                            '<td scope="col" colspan="3">'+
+                              '<ul>'+
+                                '<li>Hypertension</li>'+
+                                '<li>Diabetes Mellitus</li>'+
+                                '<li>Systemic lupus erythematosus</li>'+
+                                '<li>COPD</li>'+
+                              '</ul>'+
+                            '</td>'+
+                            
+                          '</tr>'+
+                          '<tr>'+
+                            '<th scope="col" class="align-middle text-center">Medications</th>'+
+                            '<td scope="col" colspan="3">'+
+                              '<ul>'+
+                                '<li>Hypertension</li>'+
+                                '<li>Diabetes Mellitus</li>'+
+                                '<li>Systemic lupus erythematosus</li>'+
+                                '<li>COPD</li>'+
+                              '</ul>'+
+                            '</td>'+                      
+                          '</tr>'+
+                          '<tr>'+
+                            '<th scope="col" class="align-middle text-center">Vaccinations</th>'+
+                            '<td scope="col" colspan="3">'+
+                              '<ul>'+
+                                '<li>MMR</li>'+
+                                '<li>BCG</li>'+
+                                '<li>Poliovirus</li>'+
+                                '<li>COVID-19: Sinovac, 2 doses</li>'+
+                              '</ul>'+
+                            '</td>'+
+                          '</tr>'+
+                          '<tr>'+
+                            '<th colspan="4" class="bg-secondary text-white text-center">Past Medical History</th>'+
+                          '</tr>'+
+                          '<tr >'+
+                            '<th class="bg-light text-center">Diagnosis</th>'+
+                            '<th class="bg-light text-center">Time of Onset</th>'+
+                            '<th class="bg-light text-center">Procedures</th>'+
+                            '<th class="bg-light text-center">Treatment</th>'+
+                          '</tr>'+
+                          '<tr>'+
+                            '<td>Stasis ulcers of bilateral lower extremities: MRSa positive</td>'+
+                            '<td>10 months prior</td>'+
+                            '<td>Sagittal T2-weighted magnetic resonance image of the cervical spine</td>'+
+                            '<td>Wound dressed daily by nursing wound specialis</td>'+
+                          '</tr>'+
+                          '<tr>'+
+                            '<td>Chronic bronchitis/pneumonia</td>'+
+                            '<td>3 episodes in past 18 months</td>'+
+                            '<td>Chest XRAY</td>'+
+                            '<td>Prednisone, Doxycycline, and Albuterol and Atrovent inhalers</td>'+
+                          '</tr>'+
+                          '<tr>'+
+                            '<td>History of smoking  </td>'+
+                            '<td>30+ years prior</td>'+
+                            '<td>Ordinary check</td>'+
+                            '<td>Ceased smoking 30 years ago</td>'+
+                          '</tr>'+
+                          '<tr>'+
+                            '<td>Prostate cancer  </td>'+
+                            '<td>12 years prior</td>'+
+                            '<td>Computed tomography scan</td>'+
+                            '<td>Prostatectomy and radiation therapy</td>'+
+                          '</tr>'+
+                        '</tbody>'+
+                      '</table>'+                              
+                    '</div>'+
+                  '</td>'+
+                  '</tr>'
+
     }
     return htmltext;
 }
-
-
-
-function draw_pagination(json)
-{
-    let htmltext = "";
-
-    htmltext +='<ul class="pagination justify-content-center align-items-center">';
-
-    if (json.previous == null){
-        htmltext +='<li class="page-item disabled">';
-        htmltext +='<span class="page-link" style="border-radius: 25px;">Prev.</span>';
-    } else {
-        htmltext +='<li class="page-item">';
-        htmltext +='<button class="page-link bg-outline-info " style="border-radius: 25px;"';
-        htmltext +='value='+ json.previous + ' ';
-        htmltext +='onclick=get_users(this) >Prev.</button>';
-    }
-
-    htmltext +='</li>';
-    htmltext +='<li><span class="px-3 py-auto text-muted">Page '+ json.current_page_number +' of '+ json.total_pages +' </span></li>';
-
-    if (json.next == null){
-        htmltext +='<li class="page-item disabled">';
-        htmltext +='<span class="page-link" style="border-radius: 25px;">Next</span>';
-    } else {
-        htmltext +='<li class="page-item">';
-        htmltext +='<button class="page-link bg-outline-info " style="border-radius: 25px;"';
-        htmltext +='value='+ json.next + ' ';
-        htmltext +='onclick=get_users(this) >Next</button>';
-    }
-    
-    htmltext +='</li>';
-    htmltext +='</ul>';
-    
-    return htmltext;
-}
-
 
 
 get_patients();
