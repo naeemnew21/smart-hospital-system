@@ -12,7 +12,7 @@ function drawJSON(json)
         htmltext +='</tr>';
         htmltext +='<tr >'+
                     '<td colspan="12" style="padding:0 !important">'+
-                    '<div class=" collapse" id="EMR1" >'+
+                    '<div class=" collapse" id="EMR'+x+'" >'+
                       
                       '<table class="table table-striped  table-bordered">' +
                         '<tbody>'+
