@@ -19,6 +19,7 @@ BLOOD = [
     ('AB-','AB-'),
     ('O+','O+'),
     ('O-','O-'),
+    ('Water','Water'),
     ]
 
 SOCIAL =[
@@ -103,7 +104,7 @@ class UserProfile(models.Model):
     weight          = models.DecimalField(max_digits=6, decimal_places=3, default = 0) # in KG   
     height          = models.DecimalField(max_digits=4, decimal_places=1, default = 0) # in CM
     marital_status  = models.CharField(choices=SOCIAL , max_length= 8, blank=True, null=True)
-    blood_type      = models.CharField(choices=BLOOD, max_length= 3, blank=True, null=True)
+    blood_type      = models.CharField(choices=BLOOD, max_length= 5, blank=True, null=True)
     
     def __str__(self):
         return self.user.national_id
