@@ -1,6 +1,6 @@
 # smart-hospital-system
 
-smart hospital system
+smart hospital system is a web project written in Django framework as backend
 
 
 `pip install virtualenv`
