@@ -4,17 +4,35 @@
 
 {% block content %}
 
-<div class="container  pt-4 ">
-    <br>
-    <br>
+<div class= "container mb-5" style="margin-top:8rem">
+<div class= "row mt-5">
+<div class="col mt- p-4 bg-white  shadow-sm" style="border-radius:25px">
+   <h6 class="fw-bold pb-4 fs-5">Choose your Role</h6>
+    <div class= "row mt-3">
+		 <div class= "col-4">
+			<h6 >Patient Role</h6>
+		 </div>
+		
+		<div class= "col-8">
+			<div>You would access patient dashboard as a patient</div>
+			
+			<a role="button" class="btn  mt-3 mx-auto text-white btn-primary rounded-pill" href="{%url 'patient:dashboard'%}">Go to patient dashboard <i class="fa-solid fa-angle-right ms-2"></i></a>
+		</div>
+	</div>
+	<hr class="my-4">
+	<div class= "row">
+		<div class= "col-4">
+			<h6>HR Role</h6>
+		</div>
+		
+		<div class= "col-8">
+			<div>You would access Human Resources dashboard as a staff member</div>
+			
+			<a role="button" id="staff99" class="btn mt-3 mx-auto text-white btn-primary rounded-pill" href="/{{request.user.jobprofile.job|lower}}/">Go to {{request.user.jobprofile.job}} dashboard <i class="fa-solid fa-angle-right ms-2"></i></a>
+		</div>
+	</div>
+</div>
   </div>
-
-<div class="container  pt-4 ">
-    <a role="button" class="hero-btn btn fw-bold fs-3 mt-4 mx-auto text-white btn-primary" href="{%url 'patient:dashboard'%}">Patient</a>
+  </div>
 </div>
-
-<div class="container  pt-4 ">
-    <a role="button" id="staff99" class="hero-btn btn fw-bold fs-3 mt-4 mx-auto text-white btn-primary" href="/{{request.user.jobprofile.job|lower}}/">{{request.user.jobprofile.job}}</a>
-</div>
-
 {% endblock %}
