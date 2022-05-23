@@ -71,10 +71,10 @@
                 <h6 style="color:#ff0000;">{{form.phone.errors}}</h6>
               </div>
 			  
-			  <div class="col-12">
+			  <!--<div class="col-12">
                 <div class="g-recaptcha" data-sitekey="6LdAahUfAAAAAK0ye-lzB6xG4xQ_o2YHHcCFBGuL" data-callback="verifyCaptcha"></div>
 				 <div id="g-recaptcha-error"></div>
-              </div>
+              </div>-->
 
             <button class="w-100 btn btn-primary btn-lg mt-4 fw-bold rounded-pill"  type="submit" id="regbtn">Register</button>
           </form>
@@ -86,7 +86,7 @@
 </div>
 
 <script>
-var recaptcha_response = '';
+/*var recaptcha_response = '';
 function submitUserForm() {
     if(recaptcha_response.length == 0) {
 	console.log(recaptcha_response.length)
@@ -99,7 +99,7 @@ function submitUserForm() {
 function verifyCaptcha(token) {
     recaptcha_response = token;
     document.getElementById('g-recaptcha-error').innerHTML = '';
-}
+}*/
   
   function matchPassword() {  
     
