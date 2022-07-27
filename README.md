@@ -20,4 +20,6 @@ smart hospital system is a web project written in Django framework as backend
 `python manage.py runserver --insecure`
 
 
+https://smartal.herokuapp.com/
+
 
